@@ -13,6 +13,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Install Docker Compose
+        run: sudo apt-get update && sudo apt-get install -y docker-compose        
+
       - name: Pull latest base images
         run: |
           docker pull docker.elastic.co/elasticsearch/elasticsearch:8.12.2
@@ -32,24 +35,24 @@ jobs:
 
       - name: Tag and Push Docker images
         run: |
-          docker tag docker.elastic.co/elasticsearch/elasticsearch:8.12.2 ${{ secrets.DOCKER_USERNAME }}/docker-data-elasticsearch:1.0
-          docker tag bitnami/kafka:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-kafka:1.0
-          docker tag zookeeper:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-zookeeper:1.0
-          docker tag bitnami/redis:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-redis:1.0
-          docker tag bitnami/rabbitmq:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-rabbitmq:1.0
-          docker tag docker-data-spring-boot-elasticsearch ${{ secrets.DOCKER_USERNAME }}/spring-boot-elasticsearch:1.0
-          docker tag docker-data-spring-boot-rabbitmq ${{ secrets.DOCKER_USERNAME }}/spring-boot-rabbitmq:1.0
-          docker tag docker-data-spring-boot-redis ${{ secrets.DOCKER_USERNAME }}/spring-boot-redis:1.0
-          docker tag docker-data-spring-boot-kafka ${{ secrets.DOCKER_USERNAME }}/spring-boot-kafka:1.0
-          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-elasticsearch:1.0
-          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-rabbitmq:1.0
-          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-redis:1.0
-          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-kafka:1.0
-          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-zookeeper:1.0
-          docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-elasticsearch:1.0
-          docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-rabbitmq:1.0
-          docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-redis:1.0
-          docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-kafka:1.0
+          docker tag docker.elastic.co/elasticsearch/elasticsearch:8.12.2 ${{ secrets.DOCKER_USERNAME }}/docker-data-elasticsearch:2.0
+          docker tag bitnami/kafka:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-kafka:2.0
+          docker tag zookeeper:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-zookeeper:2.0
+          docker tag bitnami/redis:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-redis:2.0
+          docker tag bitnami/rabbitmq:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-rabbitmq:2.0
+          docker tag docker-data-spring-boot-elasticsearch ${{ secrets.DOCKER_USERNAME }}/spring-boot-elasticsearch:2.0
+          docker tag docker-data-spring-boot-rabbitmq ${{ secrets.DOCKER_USERNAME }}/spring-boot-rabbitmq:2.0
+          docker tag docker-data-spring-boot-redis ${{ secrets.DOCKER_USERNAME }}/spring-boot-redis:2.0
+          docker tag docker-data-spring-boot-kafka ${{ secrets.DOCKER_USERNAME }}/spring-boot-kafka:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-elasticsearch:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-rabbitmq:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-redis:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-kafka:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/docker-data-zookeeper:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-elasticsearch:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-rabbitmq:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-redis:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-kafka:2.0
 
       - name: Deploy with docker-compose
         run: docker-compose up -d
