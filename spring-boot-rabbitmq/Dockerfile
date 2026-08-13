@@ -10,7 +10,7 @@ ENV SPRING_RABBITMQ_HOST=rabbitmq \
     SPRING_RABBITMQ_PASSWORD=guest
 RUN mvn -f pom.xml clean package
 
-FROM openjdk:21-jdk
+FROM eclipse-temurin:21-jdk
 COPY --from=build /workspace/target/*.jar app.jar
 EXPOSE 8081
 ENTRYPOINT ["java","-jar","app.jar"]
