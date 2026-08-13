@@ -13,13 +13,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Pull latest base images
+      - name: Pull base images
         run: |
           docker pull docker.elastic.co/elasticsearch/elasticsearch:8.12.2
           docker pull zookeeper:latest
-          docker pull bitnami/kafka:latest
-          docker pull bitnami/rabbitmq:latest
-          docker pull bitnami/redis:latest
+          docker pull bitnamilegacy/kafka:4.0.0-debian-12-r10
+          docker pull bitnamilegacy/rabbitmq:4.1.3-debian-12-r1
+          docker pull bitnamilegacy/redis:8.2.1-debian-12-r0
 
       - name: Build the Docker images
         run: docker compose build
@@ -35,16 +35,16 @@ jobs:
           docker tag docker.elastic.co/elasticsearch/elasticsearch:8.12.2 \
             ${{ secrets.DOCKER_USERNAME }}/docker-data-elasticsearch:3.0
 
-          docker tag bitnami/kafka:latest \
+          docker tag bitnamilegacy/kafka:4.0.0-debian-12-r10 \
             ${{ secrets.DOCKER_USERNAME }}/docker-data-kafka:3.0
 
           docker tag zookeeper:latest \
             ${{ secrets.DOCKER_USERNAME }}/docker-data-zookeeper:3.0
 
-          docker tag bitnami/redis:latest \
+          docker tag bitnamilegacy/redis:8.2.1-debian-12-r0 \
             ${{ secrets.DOCKER_USERNAME }}/docker-data-redis:3.0
 
-          docker tag bitnami/rabbitmq:latest \
+          docker tag bitnamilegacy/rabbitmq:4.1.3-debian-12-r1 \
             ${{ secrets.DOCKER_USERNAME }}/docker-data-rabbitmq:3.0
 
           docker tag docker-data-spring-boot-elasticsearch \
