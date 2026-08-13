@@ -8,7 +8,7 @@ ENV SPRING_KAFKA_URL=kafka:9092 \
     SPRING_KAFKA_TOPIC=item-topic
 RUN mvn -f pom.xml clean package
 
-FROM openjdk:21-jdk
+FROM eclipse-temurin:21-jdk
 COPY --from=build /workspace/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
