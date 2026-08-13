@@ -20,9 +20,9 @@ jobs:
         run: |
           docker pull docker.elastic.co/elasticsearch/elasticsearch:8.12.2
           docker pull zookeeper:latest
-          docker pull bitnami/kafka:latest
-          docker pull bitnami/rabbitmq:latest
-          docker pull bitnami/redis:latest
+          docker pull bitnamicharts/kafka:latest
+          docker pull bitnamicharts/rabbitmq:latest
+          docker pull bitnamicharts/redis:latest
 
       - name: Build the Docker images
         run: docker-compose build
@@ -36,10 +36,10 @@ jobs:
       - name: Tag and Push Docker images
         run: |
           docker tag docker.elastic.co/elasticsearch/elasticsearch:8.12.2 ${{ secrets.DOCKER_USERNAME }}/docker-data-elasticsearch:3.0
-          docker tag bitnami/kafka:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-kafka:3.0
+          docker tag bitnamicharts/kafka:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-kafka:3.0
           docker tag zookeeper:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-zookeeper:3.0
-          docker tag bitnami/redis:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-redis:3.0
-          docker tag bitnami/rabbitmq:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-rabbitmq:3.0
+          docker tag bitnamicharts/redis:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-redis:3.0
+          docker tag bitnamicharts/rabbitmq:latest ${{ secrets.DOCKER_USERNAME }}/docker-data-rabbitmq:3.0
           docker tag docker-data-spring-boot-elasticsearch ${{ secrets.DOCKER_USERNAME }}/spring-boot-elasticsearch:3.0
           docker tag docker-data-spring-boot-rabbitmq ${{ secrets.DOCKER_USERNAME }}/spring-boot-rabbitmq:3.0
           docker tag docker-data-spring-boot-redis ${{ secrets.DOCKER_USERNAME }}/spring-boot-redis:3.0
